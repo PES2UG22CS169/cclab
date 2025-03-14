@@ -1,38 +1,25 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
-                script {
-                    echo 'Building C++ Project...'
-                    sh 'g++ -o PES2UG22CS169 main.cpp'  
-                }
+                sh 'g++ -o hello_exec main/hello.cpp'
             }
         }
-
         stage('Test') {
             steps {
-                script {
-                    echo 'Running Tests...'
-                    sh './PES2UG22C169' 
-                }
+                sh './hello_exec'
             }
         }
-
         stage('Deploy') {
             steps {
-                script {
-                    echo 'Deploying the application...'
-                    sh 'echo "Deployment successful!"'
-                }
+                echo 'Deployment Successful'
             }
         }
     }
-
     post {
         failure {
-            echo 'Pipeline failed! Please check the logs for errors.'
+            echo 'Pipeline Failed'
         }
     }
 }
